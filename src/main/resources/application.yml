@@ -1,0 +1,32 @@
+
+server:
+  port: 8765
+  
+spring:
+  application:
+    name: netflix-zuul-api-gateway-server
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+      
+zuul:
+  ignore-local-service: true
+  routes:
+    auth-service:
+      path: /auth/**
+      service-id: AUTH-SERVICE
+      strip-prefix: false
+      sensitive-headers: Cookie,Set-Cookie
+      
+    currency-exchange-service:
+      path: /exchange/**
+      service-id: currency-exchange-service
+      
+    currency-convertor-service:
+      path: /convertor/**
+      service-id: currency-convertor-service
+      
+      
+      
